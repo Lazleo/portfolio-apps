@@ -1,4 +1,4 @@
-## D&D Battle Score App
+# D&D Battle Score App
 
-# initiative order
-# battle rounds
+### initiative order
+### battle rounds
