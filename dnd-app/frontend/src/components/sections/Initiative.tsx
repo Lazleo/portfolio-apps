@@ -1,3 +1,11 @@
+import InitTable from '../InititativeOrder/InitTable';
+import NewPlayerForm from '../InititativeOrder/NewPlayerForm';
+
 export default function Initiative() {
-  return <div>Initiative</div>;
+  return (
+    <div>
+      <NewPlayerForm />
+      <InitTable />
+    </div>
+  );
 }
