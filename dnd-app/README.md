@@ -4,21 +4,25 @@ two parts:
     1. initiative (form + table): "new player" + "initiative order"
     2. battle score (table + form): "statblock" + "battle rounds"
 
-### new player
+## INITIATIVE
+
+### 1. new player
 
 form:
     1. initiative: INPUT - initiative score
     2. name: INPUT - PC, NPC or monster name
-    3. perception: INPUT - perception check modifier
-    4. stealth: INPUT - stealth check modifier
-    5. AC: INPUT - armour class
-    6. max HP: INPUT - maximum health points
+    3. speed: INPUT - distance in ft in one move action
+    4. perception: INPUT - perception check modifier
+    5. stealth: INPUT - stealth check modifier
+    6. AC: INPUT - armour class
+    7. max HP: INPUT - maximum health points
 
 button:
     1. add: add new player to the initiative order tanble + reorder table rows in descending order by initiative score
     2. start: hide "new player" table + focus on "battle score"
+    //TODO: 3. save: save player / monster to database
 
-### initiative order
+### 2. initiative order
 
 columns:
     1. initiative: CALC - initiative score from the "new player form"
@@ -32,9 +36,62 @@ columns:
     9. max HP: CALC - maximum health points from the "new player form"
     10. current HP: CALC - maximum health minus the total damage score from the "battle rounds" form
 
-### statblock
+rows:
+    number of players
+
+## BATTLE SCORE
+
+### 1. statblock
 
 columns:
-    1. 
+    1. NAME: CALC - PC, NPC or monster name from the "new player form"
+    2. BASIC:
+        1. AC: CALC - armour class from the "new player form"
+        3. HP: CALC - maximum health points from the "new player form"
+        3. SPEED: CALC - speed from the "new player form"
+        4. INIT: CALC - initiative score from the "new player form"
+    3. STATS:
+        1. STR: NUM INPUT - strength modifier
+        2. DEX: NUM INPUT - dexterity modifier
+        3. CON: NUM INPUT - constitution modifier
+        4. INT: NUM INPUT - intellect modifier
+        5. WIS: NUM INPUT - wisdom modifier
+        6. CHA: NUM INPUT - charisma modifier
+    4. TRAITS:
+        1. SAVES: TEXT INPUT - dex +6, int +4 etc.
+        2, SKILLS: TEXT INPUT - acrobatics, deception etc.
+            1. stealth: CALC - stealth from the "new player form"
+            2. perception: CALC - perception from the "new player form"
+            3. ... other: TEXT INPUT
+        3. RESISTANCES: TEXT INPUT - poison etc.
+        4. IMMUNITIES: TEXT INPUT - non-magical etc.
+        5. SENSES: TEXT INPUT - passive perception, proficiency bonus, darkvision etc.
+        6. LANGUAGES: TEXT INPUT
+    5. FEATS: TEXT INPUT
+    7. ACTIONS: TEXT INPUT
+        1. ATTACK
+        2. BONUS ATTACK
+        3. SPELLS
+        4. REACTION
+        5. LEGENDARY
+        6. OTHER
+    8. INVENTORY: TEXT INPUT
 
-### battle rounds
+### 2. battle rounds
+
+columns:
+    1. ACTION
+        1. EFFECT
+        2. ATTACK
+        //TODO: add BUTTON for extra attack columns
+            1. HIT
+            2. DMG
+    2. BONUS ACTION
+        1. EFFECT
+        2. ATTACK
+        //TODO: add BUTTON for extra attack columns
+            1. HIT
+            2. DMG
+
+rows:
+    number of turns
