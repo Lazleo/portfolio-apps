@@ -4,9 +4,9 @@ two parts:
     1. initiative (form + table): "new player" + "initiative order"
     2. battle score (table + form): "statblock" + "battle rounds"
 
-## INITIATIVE
+## 1. INITIATIVE
 
-### 1. new player
+### 1.1. new player
 
 form:
     1. initiative: INPUT - initiative score
@@ -22,7 +22,7 @@ button:
     2. start: hide "new player" table + focus on "battle score"
     //TODO: 3. save: save player / monster to database
 
-### 2. initiative order
+### 1.2. initiative order
 
 columns:
     1. initiative: CALC - initiative score from the "new player form"
@@ -39,9 +39,9 @@ columns:
 rows:
     number of players
 
-## BATTLE SCORE
+## 2. BATTLE SCORE
 
-### 1. statblock
+### 2.1. statblock
 
 columns:
     1. NAME: CALC - PC, NPC or monster name from the "new player form"
@@ -77,7 +77,7 @@ columns:
         6. OTHER
     8. INVENTORY: TEXT INPUT
 
-### 2. battle rounds
+### 2.2. battle rounds
 
 columns:
     1. ACTION
