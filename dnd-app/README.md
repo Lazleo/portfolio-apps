@@ -1,112 +1,50 @@
+# React + TypeScript + Vite
 
-# D&D Battle Score App
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Two Parts:
-1. **Initiative** (form + table): "new player" + "initiative order"
-2. **Battle Score** (table + form): "statblock" + "battle rounds"
+Currently, two official plugins are available:
 
-## 1. INITIATIVE
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-### 1.1. New Player
+## Expanding the ESLint configuration
 
-**Form:**
-```
-    1. initiative: INPUT - initiative score
-    2. name: INPUT - PC, NPC or monster name
-    3. speed: INPUT - distance in ft in one move action
-    4. perception: INPUT - perception check modifier
-    5. stealth: INPUT - stealth check modifier
-    6. AC: INPUT - armour class
-    7. max HP: INPUT - maximum health points
-```
+If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
 
-**Button:**
-```
-    1. add: add new player to the initiative order table + reorder table rows in descending order by initiative score
-    2. start: hide "new player" table + focus on "battle score"
-    //TODO: 3. save: save player / monster to database
+- Configure the top-level `parserOptions` property like this:
+
+```js
+export default tseslint.config({
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-### 1.2. Initiative Order
+- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
+- Optionally add `...tseslint.configs.stylisticTypeChecked`
+- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
 
-**Columns:**
-```
-    1. initiative: CALC - initiative score from the "new player form"
-    2. turn: CALC - generated from 1 to the number of players / monsters + active: highlight
-    3. name: CALC - PC, NPC or monster name from the "new player form"
-    4. reaction: CALC - generated based on the input from the "battle round" form
-    5. condition: CALC - generated based on the input from the "battle round" form
-    6. perception: CALC - perception check modifier from the "new player form"
-    7. stealth: CALC - stealth check modifier from the "new player form"
-    8. AC: CALC - armour class from the "new player form"
-    9. max HP: CALC - maximum health points from the "new player form"
-    10. current HP: CALC - maximum health minus the total damage score from the "battle rounds" form
-```
+```js
+// eslint.config.js
+import react from 'eslint-plugin-react'
 
-**Rows:**
-```
-    number of players
-```
-
-## 2. BATTLE SCORE
-
-### 2.1. Statblock
-
-**Columns:**
-```
-    1. NAME: CALC - PC, NPC or monster name from the "new player form"
-    2. BASIC:
-        1. AC: CALC - armour class from the "new player form"
-        2. HP: CALC - maximum health points from the "new player form"
-        3. SPEED: CALC - speed from the "new player form"
-        4. INIT: CALC - initiative score from the "new player form"
-    3. STATS:
-        1. STR: NUM INPUT - strength modifier
-        2. DEX: NUM INPUT - dexterity modifier
-        3. CON: NUM INPUT - constitution modifier
-        4. INT: NUM INPUT - intellect modifier
-        5. WIS: NUM INPUT - wisdom modifier
-        6. CHA: NUM INPUT - charisma modifier
-    4. TRAITS:
-        1. SAVES: TEXT INPUT - dex +6, int +4 etc.
-        2. SKILLS: TEXT INPUT - acrobatics, deception etc.
-            1. stealth: CALC - stealth from the "new player form"
-            2. perception: CALC - perception from the "new player form"
-            3. ... other: TEXT INPUT
-        3. RESISTANCES: TEXT INPUT - poison etc.
-        4. IMMUNITIES: TEXT INPUT - non-magical etc.
-        5. SENSES: TEXT INPUT - passive perception, proficiency bonus, darkvision etc.
-        6. LANGUAGES: TEXT INPUT
-    5. FEATS: TEXT INPUT
-    6. ACTIONS: TEXT INPUT
-        1. ATTACK
-        2. BONUS ATTACK
-        3. SPELLS
-        4. REACTION
-        5. LEGENDARY
-        6. OTHER
-    7. INVENTORY: TEXT INPUT
-```
-
-### 2.2. Battle Rounds
-
-**Columns:**
-```
-    1. ACTION
-        1. EFFECT
-        2. ATTACK
-        //TODO: add BUTTON for extra attack columns
-            1. HIT
-            2. DMG
-    2. BONUS ACTION
-        1. EFFECT
-        2. ATTACK
-        //TODO: add BUTTON for extra attack columns
-            1. HIT
-            2. DMG
-```
-
-**Rows:**
-```
-    number of turns
+export default tseslint.config({
+  // Set the react version
+  settings: { react: { version: '18.3' } },
+  plugins: {
+    // Add the react plugin
+    react,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended rules
+    ...react.configs.recommended.rules,
+    ...react.configs['jsx-runtime'].rules,
+  },
+})
 ```
