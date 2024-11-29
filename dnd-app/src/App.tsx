@@ -43,11 +43,16 @@ const App: React.FC = () => {
     <div>
       <h1>Combat Tracker</h1>
       <AddCombatantForm addCombatant={addCombatant} />
-      <CombatantsList combatants={combatants} currentTurn={currentTurn} />
-      <CombatantTurn
-        combatant={combatants[currentTurn]}
-        updateCombatant={updateCombatant}
-      />
+      {combatants !== null && combatants.length > 0 && (
+        <>
+          <CombatantsList combatants={combatants} currentTurn={currentTurn} />
+
+          <CombatantTurn
+            combatant={combatants[currentTurn]}
+            updateCombatant={updateCombatant}
+          />
+        </>
+      )}
       <button onClick={nextTurn}>Next Turn</button>
     </div>
   );

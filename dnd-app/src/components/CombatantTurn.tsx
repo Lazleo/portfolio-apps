@@ -11,8 +11,8 @@ const CombatantTurn: React.FC<CombatantTurnProps> = ({
   combatant,
   updateCombatant,
 }) => {
-  const [action, setAction] = useState(combatant.actions);
-  const [bonusAction, setBonusAction] = useState(combatant.bonusAction);
+  const [action, setAction] = useState(combatant?.actions || "");
+  const [bonusAction, setBonusAction] = useState(combatant?.bonusAction || "");
   const [movement, setMovement] = useState(0);
 
   const handleUpdate = () => {
@@ -26,7 +26,7 @@ const CombatantTurn: React.FC<CombatantTurnProps> = ({
 
   return (
     <div>
-      <h3>{combatant.name}'s Turn</h3>
+      <h3>{combatant?.name}'s Turn</h3>
       <input
         value={action}
         onChange={(e) => setAction(e.target.value)}
